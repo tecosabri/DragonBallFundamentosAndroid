@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="kc_darkOrange">#DD6300</color>
+    <color name="kc_lightOrange">#F39000</color>
+    <color name="kc_darkRed">#5E2A00</color>
+    <color name="kc_lightRed">#AB4D00</color>
+    <color name="kc_gray">#0C0C0C</color>
+
 </resources>
