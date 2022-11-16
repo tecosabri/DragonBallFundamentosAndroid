@@ -13,5 +13,7 @@
     <color name="kc_darkRed">#5E2A00</color>
     <color name="kc_lightRed">#AB4D00</color>
     <color name="kc_gray">#0C0C0C</color>
+    <color name="kc_lightGray">#ECECEC</color>
+
 
 </resources>
