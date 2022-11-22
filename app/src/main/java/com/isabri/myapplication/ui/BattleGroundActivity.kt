@@ -1,9 +1,9 @@
-package com.isabri.myapplication
+package com.isabri.myapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.isabri.myapplication.databinding.ActivityBattleGroundBinding
-import com.isabri.myapplication.ui.heroeslist.HeroesListFragment
+import com.isabri.myapplication.ui.heroesList.HeroesList
 
 class BattleGroundActivity : AppCompatActivity() {
 
@@ -17,8 +17,8 @@ class BattleGroundActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .replace(binding.container.id, HeroesListFragment.newInstance())
-                .commitNow()
+                .add(binding.container.id, HeroesList())
+                .commit()
         }
     }
 }
