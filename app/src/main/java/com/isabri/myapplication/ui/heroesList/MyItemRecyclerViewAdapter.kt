@@ -5,15 +5,14 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.isabri.myapplication.R
-import com.isabri.myapplication.placeholder.PlaceholderContent.PlaceholderItem
 import com.isabri.myapplication.databinding.FragmentHeroesListItemBinding
+import com.isabri.myapplication.domain.models.Hero
 import com.isabri.myapplication.ui.battle.Battle
 
 
-class MyItemRecyclerViewAdapter(private val values: List<PlaceholderItem>) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+class MyItemRecyclerViewAdapter(private val values: List<Hero>) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -37,13 +36,14 @@ class MyItemRecyclerViewAdapter(private val values: List<PlaceholderItem>) : Rec
             val idView: TextView = binding.itemNumber
             val contentView: TextView = binding.content
             idView.text = item.id
-            contentView.text = item.content
+            contentView.text = item.name
             // Navigate to battle when click
             binding.root.setOnClickListener {
                 Log.d(null, "Navigating to battle fragment")
                 val activity = binding.root.context as AppCompatActivity
                 activity.supportFragmentManager
                     .beginTransaction()
+                    .addToBackStack("list")
                     .replace(R.id.container, Battle())
                     .commit()
             }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.isabri.myapplication.R
+import com.isabri.myapplication.domain.models.Hero
 import com.isabri.myapplication.placeholder.PlaceholderContent
 
 /**
@@ -39,7 +40,11 @@ class HeroesList : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MyItemRecyclerViewAdapter(PlaceholderContent.ITEMS)
+                val vegeta = Hero("", "1", "Vegeta")
+                val goku = Hero("", "2", "Goku")
+                val piccolo = Hero("", "3", "Piccolo")
+                val heroes = listOf<Hero>(vegeta, goku, piccolo)
+                adapter = MyItemRecyclerViewAdapter(heroes)
             }
         }
         return view
