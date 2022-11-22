@@ -1,5 +1,6 @@
 package com.isabri.myapplication
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,13 +14,15 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setListeners()
     }
 
 
     private fun setListeners() {
         with(binding) {
             bLogin.setOnClickListener {
-
+                val intent = Intent(this@LoginActivity, BattleGroundActivity::class.java)
+                startActivity(intent)
             }
         }
     }
