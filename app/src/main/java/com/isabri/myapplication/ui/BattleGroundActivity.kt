@@ -2,6 +2,8 @@ package com.isabri.myapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import com.isabri.myapplication.databinding.ActivityBattleGroundBinding
 import com.isabri.myapplication.ui.heroesList.HeroesList
 

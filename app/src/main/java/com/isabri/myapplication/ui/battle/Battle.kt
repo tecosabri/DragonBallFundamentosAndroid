@@ -1,32 +1,25 @@
 package com.isabri.myapplication.ui.battle
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.isabri.myapplication.R
+import androidx.fragment.app.activityViewModels
+import com.isabri.myapplication.databinding.FragmentBattleBinding
+import com.isabri.myapplication.ui.BattleGroundViewModel
 
 class Battle : Fragment() {
 
-    companion object {
-        fun newInstance() = Battle()
-    }
-
-    private lateinit var viewModel: BattleViewModel
+    private val viewModel: BattleGroundViewModel by activityViewModels()
+    private lateinit var binding: FragmentBattleBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_battle, container, false)
+    ): View {
+        binding = FragmentBattleBinding.inflate(inflater)
+        binding.text.text = "${viewModel.fightingHeroes[0].name} will fight ${viewModel.fightingHeroes[1].name}"
+        return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(BattleViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

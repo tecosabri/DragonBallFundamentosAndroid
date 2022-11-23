@@ -1,4 +1,4 @@
-package com.isabri.myapplication.ui.heroesList
+package com.isabri.myapplication.ui
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -14,10 +14,11 @@ import java.io.IOException
 
 
 
-class HeroesListViewModel: ViewModel() {
+class BattleGroundViewModel: ViewModel() {
 
     val stateLiveData: MutableLiveData<HeroesListState> by lazy { MutableLiveData<HeroesListState>() }
     lateinit var heroesList: List<Hero>
+    var fightingHeroes: MutableList<Hero> = arrayListOf()
 
     private val token: String = "eyJhbGciOiJIUzI1NiIsImtpZCI6InByaXZhdGUiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6ImJlamxAa2VlcGNvZGluZy5lcyIsImlkZW50aWZ5IjoiN0FCOEFDNEQtQUQ4Ri00QUNFLUFBNDUtMjFFODRBRThCQkU3IiwiZXhwaXJhdGlvbiI6NjQwOTIyMTEyMDB9.PHf8uuTCyM638Ehd--tt0B5M6sbp-XLAApoeMHc-yZw"
 
@@ -37,11 +38,11 @@ class HeroesListViewModel: ViewModel() {
         call.enqueue(
             object: Callback {
                 override fun onFailure(call: Call, e: IOException) {
-                    Log.e(HeroesListViewModel::javaClass.name, "Error fetching heroes: ${e.message}")
+                    Log.e(BattleGroundViewModel::javaClass.name, "Error fetching heroes: ${e.message}")
                     setValueOnMainThread(HeroesListState.Failure(e.message.toString()))
                 }
                 override fun onResponse(call: Call, response: Response) {
-                    Log.d(HeroesListViewModel::javaClass.name, "Success fetching heroes")
+                    Log.d(BattleGroundViewModel::javaClass.name, "Success fetching heroes")
                     val responseBody = response.body?.string()
                     val responseHeroes: Array<Hero> = Gson().fromJson(responseBody, Array<Hero>::class.java)
                     val heroes: List<Hero> = responseHeroes.map { Hero(it.photo, it.id, it.name) }
@@ -53,6 +54,15 @@ class HeroesListViewModel: ViewModel() {
                 }
             }
         )
+    }
+
+    fun setFightingHeroes(selectedHero: Hero) {
+        // Get random number
+        val randomHero = heroesList[(0..heroesList.size).random()]
+        fightingHeroes.add(0, randomHero)
+        fightingHeroes.add(0, selectedHero)
+        println(fightingHeroes[0].name)
+        println(fightingHeroes[1].name)
     }
 
     fun setValueOnMainThread(value: HeroesListState) {

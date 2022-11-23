@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.isabri.myapplication.R
 import com.isabri.myapplication.databinding.FragmentHeroesListItemBinding
 import com.isabri.myapplication.domain.models.Hero
+import com.isabri.myapplication.ui.BattleGroundActivity
+import com.isabri.myapplication.ui.BattleGroundViewModel
 import com.isabri.myapplication.ui.battle.Battle
 
 
-class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var loading: Boolean = false) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var loading: Boolean = false, private val viewModel: BattleGroundViewModel? = null) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -55,10 +56,13 @@ class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var load
             // Navigate to battle when click
             binding.root.setOnClickListener {
                 Log.d(null, "Navigating to battle fragment")
-                val activity = binding.root.context as AppCompatActivity
+                val activity = binding.root.context as BattleGroundActivity
+                viewModel?.let {
+                    it.setFightingHeroes(hero)
+                }
                 activity.supportFragmentManager
                     .beginTransaction()
-                    .addToBackStack("list")
+                    .addToBackStack("list2")
                     .replace(R.id.container, Battle())
                     .commit()
             }
