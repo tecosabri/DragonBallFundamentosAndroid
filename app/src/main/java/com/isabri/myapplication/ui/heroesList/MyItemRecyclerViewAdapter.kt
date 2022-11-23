@@ -35,7 +35,7 @@ class MyItemRecyclerViewAdapter(private val values: List<Hero>) : RecyclerView.A
             val item = values[position]
             val idView: TextView = binding.itemNumber
             val contentView: TextView = binding.content
-            idView.text = item.id
+            idView.text = item.id.first().toString()
             contentView.text = item.name
             // Navigate to battle when click
             binding.root.setOnClickListener {

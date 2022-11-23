@@ -9,6 +9,5 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".HeroesList"
     tools:listitem="@layout/fragment_heroes_list_item"
     tools:itemCount="10"/>
