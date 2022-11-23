@@ -46,8 +46,6 @@ class BattleGroundViewModel: ViewModel() {
                     val responseBody = response.body?.string()
                     val responseHeroes: Array<Hero> = Gson().fromJson(responseBody, Array<Hero>::class.java)
                     val heroes: List<Hero> = responseHeroes.map { Hero(it.photo, it.id, it.name) }
-                    Thread.sleep(2_000)
-
                     setValueOnMainThread(HeroesListState.Success(heroes))
                     heroes.forEach { println(it) }
                     heroesList = heroes
@@ -57,12 +55,14 @@ class BattleGroundViewModel: ViewModel() {
     }
 
     fun setFightingHeroes(selectedHero: Hero) {
-        // Get random number
-        val randomHero = heroesList[(0..heroesList.size).random()]
-        fightingHeroes.add(0, randomHero)
-        fightingHeroes.add(0, selectedHero)
-        println(fightingHeroes[0].name)
-        println(fightingHeroes[1].name)
+        // Get random number other than selectedHero position
+
+        heroesList.let {
+            val heroesExcludingSelectedHero = it.filter { hero -> hero != selectedHero }
+            val randomHero = heroesExcludingSelectedHero[(0..heroesExcludingSelectedHero.size).random()]
+            fightingHeroes.add(0, randomHero)
+            fightingHeroes.add(0, selectedHero)
+        }
     }
 
     fun setValueOnMainThread(value: HeroesListState) {
