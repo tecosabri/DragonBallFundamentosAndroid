@@ -3,6 +3,7 @@ package com.isabri.myapplication.ui.heroesList
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -12,7 +13,7 @@ import com.isabri.myapplication.domain.models.Hero
 import com.isabri.myapplication.ui.battle.Battle
 
 
-class MyItemRecyclerViewAdapter(private val values: List<Hero>) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var loading: Boolean = false) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -32,11 +33,25 @@ class MyItemRecyclerViewAdapter(private val values: List<Hero>) : RecyclerView.A
 
     inner class ViewHolder(private val binding: FragmentHeroesListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
-            val item = values[position]
-            val idView: TextView = binding.itemNumber
-            val contentView: TextView = binding.content
-            idView.text = item.id.first().toString()
-            contentView.text = item.name
+
+            // If loading, show loading progress bar
+            when (loading) {
+                true -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.name.visibility = View.INVISIBLE
+                    binding.life.visibility = View.INVISIBLE
+                    return
+                }
+                false -> binding.progressBar.visibility = View.INVISIBLE
+            }
+
+            // If ended loading, set hero
+            val hero = values[position]
+            val nameView: TextView = binding.name
+            val lifeView: TextView = binding.life
+            nameView.text = hero.name
+            lifeView.text = "Life: ${hero.currentLive} of ${hero.maxLive}"
+
             // Navigate to battle when click
             binding.root.setOnClickListener {
                 Log.d(null, "Navigating to battle fragment")

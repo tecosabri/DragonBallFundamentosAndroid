@@ -47,15 +47,17 @@ class HeroesList : Fragment() {
         viewModel.stateLiveData.observe(viewLifecycleOwner) {
             when(it) {
                 is HeroesListViewModel.HeroesListState.Success -> {
+                    // Within main thread as the heroes list gets updated asynchronously
                     lifecycleScope.launch(Dispatchers.Main) {
                         view.adapter = MyItemRecyclerViewAdapter(viewModel.heroesList)
                     }
                 }
                 is HeroesListViewModel.HeroesListState.Failure -> {
-                    view.adapter = MyItemRecyclerViewAdapter(listOf(Hero("", "1", "Vegeta")))
+                    view.adapter = MyItemRecyclerViewAdapter(listOf(Hero("", "", "Error fetching heroes")))
                 }
                 is HeroesListViewModel.HeroesListState.Loading -> {
-                    view.adapter = MyItemRecyclerViewAdapter(listOf(Hero("", "1", "Vegeta")))
+                    // A list of one hero provides only one cell to show the loading status
+                    view.adapter = MyItemRecyclerViewAdapter(listOf(Hero("", "", "")), true)
                 }
             }
         }

@@ -45,6 +45,8 @@ class HeroesListViewModel: ViewModel() {
                     val responseBody = response.body?.string()
                     val responseHeroes: Array<Hero> = Gson().fromJson(responseBody, Array<Hero>::class.java)
                     val heroes: List<Hero> = responseHeroes.map { Hero(it.photo, it.id, it.name) }
+                    Thread.sleep(2_000)
+
                     setValueOnMainThread(HeroesListState.Success(heroes))
                     heroes.forEach { println(it) }
                     heroesList = heroes
