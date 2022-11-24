@@ -19,6 +19,12 @@ class Battle : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentBattleBinding.inflate(inflater)
+
+        binding.bFight.setOnClickListener {
+            viewModel.fight()
+            reloadLifeViews()
+        }
+
         binding.presentation.text = "${viewModel.fightingHeroes[0].name} will fight ${viewModel.fightingHeroes[1].name}"
         binding.hero1name.text = viewModel.fightingHeroes[0].name
         binding.hero2name.text = viewModel.fightingHeroes[1].name
@@ -26,5 +32,10 @@ class Battle : Fragment() {
         binding.hero2Life.progress = viewModel.fightingHeroes[1].currentLive
 
         return binding.root
+    }
+
+    private fun reloadLifeViews() {
+        binding.hero1Life.progress = viewModel.fightingHeroes[0].currentLive
+        binding.hero2Life.progress = viewModel.fightingHeroes[1].currentLive
     }
 }

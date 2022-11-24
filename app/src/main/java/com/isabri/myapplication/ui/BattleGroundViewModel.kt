@@ -71,6 +71,24 @@ class BattleGroundViewModel: ViewModel() {
         }
     }
 
+    fun fight() {
+        val hero1damage = (0..60).random()
+        val hero2damage = (0..60).random()
+        with(fightingHeroes[0]) {
+            currentLive -= hero2damage
+            if(currentLive <= 0) {
+            //TODO to selection panel
+            }
+        }
+        with(fightingHeroes[1]) {
+            currentLive -= hero1damage
+            if(currentLive <= 0) {
+                // TODO select another random hero
+            }
+        }
+        println(" hero 1 life is ${fightingHeroes[0].currentLive} and hero 2 life is ${fightingHeroes[1].currentLive}")
+    }
+
     sealed class HeroesListState {
         data class Success(val heroes: List<Hero>): HeroesListState()
         data class Failure(val errorMessage: String): HeroesListState()
