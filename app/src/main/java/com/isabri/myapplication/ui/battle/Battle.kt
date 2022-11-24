@@ -1,12 +1,14 @@
 package com.isabri.myapplication.ui.battle
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.isabri.myapplication.databinding.FragmentBattleBinding
+import com.isabri.myapplication.ui.BattleGroundActivity
 import com.isabri.myapplication.ui.BattleGroundViewModel
 
 class Battle : Fragment() {
@@ -21,8 +23,9 @@ class Battle : Fragment() {
         binding = FragmentBattleBinding.inflate(inflater)
 
         binding.bFight.setOnClickListener {
-            viewModel.fight()
+            val returnToPreviousScene = viewModel.fight()
             reloadLifeViews()
+            if(returnToPreviousScene) returnToPreviousScene()
         }
 
         binding.presentation.text = "${viewModel.fightingHeroes[0].name} will fight ${viewModel.fightingHeroes[1].name}"
@@ -37,5 +40,11 @@ class Battle : Fragment() {
     private fun reloadLifeViews() {
         binding.hero1Life.progress = viewModel.fightingHeroes[0].currentLive
         binding.hero2Life.progress = viewModel.fightingHeroes[1].currentLive
+    }
+
+    private fun returnToPreviousScene() {
+        val activity = activity as BattleGroundActivity
+        activity.supportFragmentManager
+            .popBackStack()
     }
 }

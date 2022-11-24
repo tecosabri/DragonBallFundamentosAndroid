@@ -1,6 +1,8 @@
 package com.isabri.myapplication.ui
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -19,8 +21,8 @@ class BattleGroundViewModel: ViewModel() {
     val stateLiveData: MutableLiveData<HeroesListState> by lazy { MutableLiveData<HeroesListState>() }
     lateinit var heroesList: List<Hero>
     var fightingHeroes: MutableList<Hero> = arrayListOf()
-
-    private val token: String = "eyJhbGciOiJIUzI1NiIsImtpZCI6InByaXZhdGUiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6ImJlamxAa2VlcGNvZGluZy5lcyIsImlkZW50aWZ5IjoiN0FCOEFDNEQtQUQ4Ri00QUNFLUFBNDUtMjFFODRBRThCQkU3IiwiZXhwaXJhdGlvbiI6NjQwOTIyMTEyMDB9.PHf8uuTCyM638Ehd--tt0B5M6sbp-XLAApoeMHc-yZw"
+ var token: String = ""
+//    private val token: String = "eyJhbGciOiJIUzI1NiIsImtpZCI6InByaXZhdGUiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6ImJlamxAa2VlcGNvZGluZy5lcyIsImlkZW50aWZ5IjoiN0FCOEFDNEQtQUQ4Ri00QUNFLUFBNDUtMjFFODRBRThCQkU3IiwiZXhwaXJhdGlvbiI6NjQwOTIyMTEyMDB9.PHf8uuTCyM638Ehd--tt0B5M6sbp-XLAApoeMHc-yZw"
 
     fun getHeroes() {
         setValueOnMainThread(HeroesListState.Loading)
@@ -54,15 +56,18 @@ class BattleGroundViewModel: ViewModel() {
         )
     }
 
-    fun setFightingHeroes(selectedHero: Hero) {
+    // Returns true if the selected hero is able to fight (is not dead)
+    fun setFightingHeroes(selectedHero: Hero): Boolean {
         // Get random number other than selectedHero position
-
+        if(selectedHero.currentLive == 0) return false // Avoids selecting a dead hero
+        if(getWinner() != null) return false // The function only continues if more than 1 hero alive
         heroesList.let {
-            val heroesExcludingSelectedHero = it.filter { hero -> hero != selectedHero }
-            val randomHero = heroesExcludingSelectedHero[(0..heroesExcludingSelectedHero.size).random()]
+            val aliveHeroesExcludingSelectedHero = it.filter { hero -> hero != selectedHero && hero.currentLive > 0}
+            val randomHero = aliveHeroesExcludingSelectedHero[(aliveHeroesExcludingSelectedHero.indices).random()]
             fightingHeroes.add(0, randomHero)
             fightingHeroes.add(0, selectedHero)
         }
+        return true
     }
 
     fun setValueOnMainThread(value: HeroesListState) {
@@ -71,28 +76,67 @@ class BattleGroundViewModel: ViewModel() {
         }
     }
 
-    fun fight() {
-        val hero1damage = (0..60).random()
-        val hero2damage = (0..60).random()
-        with(fightingHeroes[0]) {
-            currentLive -= hero2damage
-            if(currentLive <= 0) {
-            //TODO to selection panel
+    // Returns true if any of the heroes has died
+    fun fight(): Boolean {
+        val hero1damage = (10..60).random()
+        val hero2damage = (10..60).random()
+        fightingHeroes[0].let { hero1 ->
+            fightingHeroes[1].let { hero2 ->
+                hero1.currentLive -= hero2damage
+                hero2.currentLive -= hero1damage
+                val hero1isDead = checkNonNegativeHeroLife(hero1)
+                val hero2isDead = checkNonNegativeHeroLife(hero2)
+                if(hero1isDead || hero2isDead) {
+                    return true
+                }
             }
         }
-        with(fightingHeroes[1]) {
-            currentLive -= hero1damage
-            if(currentLive <= 0) {
-                // TODO select another random hero
-            }
-        }
-        println(" hero 1 life is ${fightingHeroes[0].currentLive} and hero 2 life is ${fightingHeroes[1].currentLive}")
+        return false
     }
+
+    // Returns true if the hero has died and sets its life to 0
+    private fun checkNonNegativeHeroLife(hero: Hero): Boolean {
+        when(hero.currentLive) {
+            in Int.MIN_VALUE..-1 -> {
+                hero.currentLive = 0
+                return true
+            }
+            0 -> return true
+
+        }
+        return false
+    }
+
+    // Returns the only hero alive, an empty name hero if all heroes are dead or null if there is still any hero alive
+    private fun getWinner(): Hero? {
+        val aliveHeroes = heroesList.filter { it.currentLive > 0 }
+        if(aliveHeroes.count() == 1) return aliveHeroes[0]
+        if(aliveHeroes.isEmpty()) return Hero("","","")
+        return null
+    }
+
+    // Checks the winner and shows a toast with the result
+    fun checkWinner(context: Context) {
+        if(this::heroesList.isInitialized) {
+            getWinner()?.let {
+                if (it.name.isBlank()) Toast.makeText(
+                    context,
+                    "The game has ended",
+                    Toast.LENGTH_LONG
+                ).show()
+                if (!it.name.isBlank()) Toast.makeText(
+                    context,
+                    "The winner is ${it.name}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
 
     sealed class HeroesListState {
         data class Success(val heroes: List<Hero>): HeroesListState()
         data class Failure(val errorMessage: String): HeroesListState()
         object Loading: HeroesListState()
-
     }
 }

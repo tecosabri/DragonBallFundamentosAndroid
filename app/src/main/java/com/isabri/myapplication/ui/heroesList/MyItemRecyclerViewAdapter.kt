@@ -53,18 +53,23 @@ class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var load
             nameView.text = hero.name
             lifeView.text = "Life: ${hero.currentLive} of ${hero.maxLive}"
 
-            // Navigate to battle when click
+            // Navigate to battle when clicking on a hero
             binding.root.setOnClickListener {
-                Log.d(null, "Navigating to battle fragment")
-                val activity = binding.root.context as BattleGroundActivity
+                Log.d("Navigation", "Navigating to battle fragment")
+
+                var heroIsAbleToFight = false
                 viewModel?.let {
-                    it.setFightingHeroes(hero)
+                    heroIsAbleToFight = it.setFightingHeroes(hero)
                 }
-                activity.supportFragmentManager
-                    .beginTransaction()
-                    .addToBackStack("list2")
-                    .replace(R.id.container, Battle())
-                    .commit()
+
+                if(heroIsAbleToFight) {
+                    val activity = binding.root.context as BattleGroundActivity
+                    activity.supportFragmentManager
+                        .beginTransaction()
+                        .addToBackStack("list2")
+                        .replace(R.id.container, Battle())
+                        .commit()
+                }
             }
         }
     }
