@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import com.isabri.myapplication.R
 import com.isabri.myapplication.databinding.FragmentHeroesListItemBinding
@@ -49,9 +50,9 @@ class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var load
             // If ended loading, set hero
             val hero = values[position]
             val nameView: TextView = binding.name
-            val lifeView: TextView = binding.life
+            val lifeView: ProgressBar = binding.life
             nameView.text = hero.name
-            lifeView.text = "Life: ${hero.currentLive} of ${hero.maxLive}"
+            lifeView.progress = hero.currentLive
 
             // Navigate to battle when clicking on a hero
             binding.root.setOnClickListener {
