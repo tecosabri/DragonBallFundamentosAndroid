@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import coil.load
 import com.isabri.myapplication.R
 import com.isabri.myapplication.databinding.FragmentHeroesListItemBinding
 import com.isabri.myapplication.domain.models.Hero
@@ -51,8 +53,10 @@ class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var load
             val hero = values[position]
             val nameView: TextView = binding.name
             val lifeView: ProgressBar = binding.life
+            val heroPhoto: ImageView = binding.ivHeroPhoto
             nameView.text = hero.name
             lifeView.progress = hero.currentLive
+            heroPhoto.load(hero.photo)
 
             // Navigate to battle when clicking on a hero
             binding.root.setOnClickListener {

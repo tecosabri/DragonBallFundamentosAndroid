@@ -25,18 +25,19 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:text="hero1name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/hero1Life" />
+        app:layout_constraintBottom_toTopOf="@+id/hero1Life"
+        app:layout_constraintEnd_toEndOf="@+id/hero1Life"
+        app:layout_constraintStart_toStartOf="@+id/hero1Life" />
 
     <ProgressBar
         android:id="@+id/hero1Life"
         style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/presentation"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/hero2name"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toStartOf="@id/hero2Life"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/presentation" />
 
     <TextView
@@ -45,30 +46,52 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:text="hero2name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/hero2Life" />
+        app:layout_constraintBottom_toTopOf="@+id/hero2Life"
+        app:layout_constraintEnd_toEndOf="@id/hero2Life"
+        app:layout_constraintStart_toStartOf="@id/hero2Life" />
 
     <ProgressBar
         android:id="@+id/hero2Life"
         style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="200dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/presentation"
+        android:layout_marginTop="32dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toEndOf="@+id/hero2name"
-        app:layout_constraintTop_toBottomOf="@+id/hero1Life" />
+        app:layout_constraintStart_toEndOf="@+id/hero1Life"
+        app:layout_constraintTop_toBottomOf="@+id/presentation" />
 
     <Button
         android:id="@+id/b_fight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Fight"
-        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hero2Life" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_hero1Photo"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <ImageView
+        android:id="@+id/iv_hero1Photo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/hero1Life"
+        app:layout_constraintStart_toStartOf="@+id/hero1Life"
+        app:layout_constraintTop_toBottomOf="@+id/hero1Life"
+        tools:src="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/iv_hero2Photo"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/hero2Life"
+        app:layout_constraintStart_toStartOf="@+id/hero2Life"
+        app:layout_constraintTop_toBottomOf="@+id/hero2Life"
+        tools:src="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
