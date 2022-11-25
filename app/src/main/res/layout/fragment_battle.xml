@@ -14,7 +14,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp"
         android:gravity="center"
-        android:text="Presentation"
+        android:text="@string/presentation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="hero1name"
+        android:text="@string/hero1name"
         app:layout_constraintBottom_toTopOf="@+id/hero1Life"
         app:layout_constraintEnd_toEndOf="@+id/hero1Life"
         app:layout_constraintStart_toStartOf="@+id/hero1Life" />
@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="hero2name"
+        android:text="@string/hero2name"
         app:layout_constraintBottom_toTopOf="@+id/hero2Life"
         app:layout_constraintEnd_toEndOf="@id/hero2Life"
         app:layout_constraintStart_toStartOf="@id/hero2Life" />
@@ -66,7 +66,7 @@
         android:id="@+id/b_fight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fight"
+        android:text="@string/fight"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

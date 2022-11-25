@@ -1,13 +1,13 @@
 package com.isabri.myapplication.ui.battle
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import coil.load
+import com.isabri.myapplication.R
 import com.isabri.myapplication.databinding.FragmentBattleBinding
 import com.isabri.myapplication.ui.BattleGroundActivity
 import com.isabri.myapplication.ui.BattleGroundViewModel
@@ -32,7 +32,7 @@ class Battle : Fragment() {
         val hero1 = viewModel.fightingHeroes[0]
         val hero2 = viewModel.fightingHeroes[1]
 
-        binding.presentation.text = "${hero1.name} will fight ${hero2.name}"
+        binding.presentation.text = getString(R.string.presentation, hero1.name, hero2.name)
         binding.hero1name.text = hero1.name
         binding.hero2name.text = hero2.name
         binding.hero1Life.progress = hero1.currentLive

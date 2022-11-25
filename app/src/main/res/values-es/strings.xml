@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Dragon Ball</string>
+    <string name="enterEmail">Introduzca su email</string>
+    <string name="enterPassword">Introduzca su contraseña</string>
+    <string name="login">Entrar</string>
+    <string name="presentation">%1$s pelea contra %2$s</string>
+    <string name="hero1name">Nombre de héroe 1</string>
+    <string name="hero2name">Nombre de héroe 2</string>
+    <string name="fight">Luchar</string>
+    <string name="name">Nombre</string>
+    <string name="gameEnded">El juego ha terminado</string>
+    <string name="heroHasWon">%1$s ha ganado</string>
+</resources>

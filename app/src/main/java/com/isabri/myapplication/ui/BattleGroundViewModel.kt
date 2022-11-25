@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
+import com.isabri.myapplication.R
 import com.isabri.myapplication.domain.models.Hero
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -120,12 +121,12 @@ class BattleGroundViewModel: ViewModel() {
             getWinner()?.let {
                 if (it.name.isBlank()) Toast.makeText(
                     context,
-                    "The game has ended",
+                    context.resources.getString(R.string.gameEnded),
                     Toast.LENGTH_LONG
                 ).show()
                 if (!it.name.isBlank()) Toast.makeText(
                     context,
-                    "The winner is ${it.name}",
+                    context.resources.getString(R.string.heroHasWon, it.name),
                     Toast.LENGTH_LONG
                 ).show()
             }
