@@ -25,6 +25,7 @@ class BattleGroundActivity : AppCompatActivity() {
             }
 
             // Navigate to fragment
+            Log.d("MyLog", "Navigating to heroes list")
             supportFragmentManager.beginTransaction()
                 .add(binding.container.id, HeroesList())
                 .commit()

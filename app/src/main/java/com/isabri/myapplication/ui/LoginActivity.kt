@@ -42,13 +42,13 @@ class LoginActivity : AppCompatActivity() {
             when(it) {
                 is LoginViewModel.LoginState.Success -> {
                     binding.pbLogin.visibility = View.INVISIBLE
-                    Log.e("Success in getting token", "${viewModel.token}")
+                    Log.d("MyLog", "Success getting token: ${viewModel.token}")
                     val intent = Intent(this@LoginActivity, BattleGroundActivity::class.java)
                     intent.putExtra("token", viewModel.token)
                     startActivity(intent)
                 }
                 is LoginViewModel.LoginState.Failure -> {
-                    Log.e("Message failure", "${it.errorMessage}")
+                    Log.d("MyLog", "${it.errorMessage}")
                     binding.pbLogin.visibility = View.INVISIBLE
                     Toast.makeText(this, "Error while login: ${it.errorMessage}", Toast.LENGTH_LONG).show()
                 }

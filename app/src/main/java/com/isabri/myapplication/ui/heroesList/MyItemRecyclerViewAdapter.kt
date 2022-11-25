@@ -56,7 +56,7 @@ class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var load
 
             // Navigate to battle when clicking on a hero
             binding.root.setOnClickListener {
-                Log.d("Navigation", "Navigating to battle fragment")
+                Log.d("MyLog", "Navigating to battle fragment")
 
                 var heroIsAbleToFight = false
                 viewModel?.let {
