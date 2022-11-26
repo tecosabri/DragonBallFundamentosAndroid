@@ -17,14 +17,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-interface HeroesListItemInterface {
-    fun onClick(hero: Hero)
-}
 
 /**
  * A fragment representing a list of Items.
  */
-class HeroesList : Fragment(), HeroesListItemInterface {
+class HeroesList : Fragment() {
 
     private val viewModel: BattleGroundViewModel by activityViewModels()
     private lateinit var binding: FragmentHeroesListListBinding
@@ -67,9 +64,5 @@ class HeroesList : Fragment(), HeroesListItemInterface {
                 }
             }
         }
-    }
-
-    override fun onClick(hero: Hero) {
-        viewModel.setFightingHeroes(hero)
     }
 }
