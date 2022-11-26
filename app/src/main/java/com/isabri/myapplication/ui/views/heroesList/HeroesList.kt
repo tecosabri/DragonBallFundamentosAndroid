@@ -1,4 +1,4 @@
-package com.isabri.myapplication.ui.heroesList
+package com.isabri.myapplication.ui.views.heroesList
 
 import android.os.Bundle
 import android.util.Log
@@ -8,16 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.isabri.myapplication.databinding.FragmentHeroesListListBinding
 import com.isabri.myapplication.domain.models.Hero
-import com.isabri.myapplication.ui.BattleGroundActivity
-import com.isabri.myapplication.ui.BattleGroundViewModel
+import com.isabri.myapplication.ui.viewModels.BattleGroundViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.time.Duration
 
 
 interface HeroesListItemInterface {

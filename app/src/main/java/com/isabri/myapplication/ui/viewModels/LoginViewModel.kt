@@ -1,11 +1,9 @@
-package com.isabri.myapplication.ui
+package com.isabri.myapplication.ui.viewModels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
-import com.isabri.myapplication.domain.models.Hero
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.*

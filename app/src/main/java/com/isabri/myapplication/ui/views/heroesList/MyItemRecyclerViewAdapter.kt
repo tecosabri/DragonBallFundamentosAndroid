@@ -1,4 +1,4 @@
-package com.isabri.myapplication.ui.heroesList
+package com.isabri.myapplication.ui.views.heroesList
 
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
@@ -12,9 +12,9 @@ import coil.load
 import com.isabri.myapplication.R
 import com.isabri.myapplication.databinding.FragmentHeroesListItemBinding
 import com.isabri.myapplication.domain.models.Hero
-import com.isabri.myapplication.ui.BattleGroundActivity
-import com.isabri.myapplication.ui.BattleGroundViewModel
-import com.isabri.myapplication.ui.battle.Battle
+import com.isabri.myapplication.ui.views.BattleGroundActivity
+import com.isabri.myapplication.ui.viewModels.BattleGroundViewModel
+import com.isabri.myapplication.ui.views.battle.Battle
 
 
 class MyItemRecyclerViewAdapter(private val values: List<Hero>, private var loading: Boolean = false, private val viewModel: BattleGroundViewModel? = null) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {

@@ -1,12 +1,12 @@
-package com.isabri.myapplication.ui
+package com.isabri.myapplication.ui.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
 import com.isabri.myapplication.databinding.ActivityBattleGroundBinding
-import com.isabri.myapplication.ui.heroesList.HeroesList
+import com.isabri.myapplication.ui.viewModels.BattleGroundViewModel
+import com.isabri.myapplication.ui.views.heroesList.HeroesList
 
 class BattleGroundActivity : AppCompatActivity() {
 

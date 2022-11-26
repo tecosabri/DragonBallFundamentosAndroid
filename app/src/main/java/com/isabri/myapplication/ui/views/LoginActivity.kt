@@ -1,4 +1,4 @@
-package com.isabri.myapplication.ui
+package com.isabri.myapplication.ui.views
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,11 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.isabri.myapplication.databinding.ActivityLoginBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.isabri.myapplication.ui.viewModels.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 

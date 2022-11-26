@@ -1,4 +1,4 @@
-package com.isabri.myapplication.ui
+package com.isabri.myapplication.ui.viewModels
 
 import android.content.Context
 import android.util.Log

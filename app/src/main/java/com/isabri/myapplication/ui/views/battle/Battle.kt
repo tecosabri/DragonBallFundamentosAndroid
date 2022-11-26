@@ -1,4 +1,4 @@
-package com.isabri.myapplication.ui.battle
+package com.isabri.myapplication.ui.views.battle
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,8 +9,8 @@ import androidx.fragment.app.activityViewModels
 import coil.load
 import com.isabri.myapplication.R
 import com.isabri.myapplication.databinding.FragmentBattleBinding
-import com.isabri.myapplication.ui.BattleGroundActivity
-import com.isabri.myapplication.ui.BattleGroundViewModel
+import com.isabri.myapplication.ui.views.BattleGroundActivity
+import com.isabri.myapplication.ui.viewModels.BattleGroundViewModel
 
 class Battle : Fragment() {
 
